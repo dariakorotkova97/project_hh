@@ -14,7 +14,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class InterfaceSearchPanel extends JPanel{
 
     public static JFrame resultFrame = new JFrame();
-    public static JPanel panelResume = new JPanel();
     public static String textSkils;
     public static int flag = 0;
     public static int countResume = 0;
@@ -140,11 +139,11 @@ public class InterfaceSearchPanel extends JPanel{
                         getErrorMassage("<html>Наша программа выводит<br> не более 15 резюме!</br>");
                         return;
                     }
-
+                    JPanel panelResume =new InterfaceResultPanel();
                     resultFrame.setBounds(200,30,670,630);
                     resultFrame.setTitle("Результаты поиска");
                     resultFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                    resultFrame.add(new InterfaceResultPanel());
+                    resultFrame.add(InterfaceResultPanel.panelResume);
                     resultFrame.setResizable(false);
                     DataBase.connectDateBase();
                     DataBase.createDataBase();
