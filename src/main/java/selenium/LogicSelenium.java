@@ -15,7 +15,7 @@ public class LogicSelenium {
     public static ChromeDriver chromeDriver;
 
     public static void findResume() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", ".//src/libs/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C://chromedriver/chromedriver.exe");
         options = new ChromeOptions();
         options.addArguments("--headless");
         chromeDriver = new ChromeDriver(options);

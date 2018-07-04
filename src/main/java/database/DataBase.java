@@ -23,7 +23,7 @@ public class DataBase {
         connection = null;
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5433/postgres",
+                    "jdbc:postgresql://localhost:5432/postgres",
                     "postgres", "root");
         } catch (SQLException ex) {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE,
