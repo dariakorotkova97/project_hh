@@ -1,11 +1,15 @@
 package selenium;
 
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HHResultResumePage;
 import pages.HHSearchPage;
 import interfaces.InterfaceSearchPanel;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class LogicSelenium {
 
@@ -13,15 +17,18 @@ public class LogicSelenium {
     public static HHResultResumePage hhResultResumePage;
     public static ChromeOptions options;
     public static ChromeDriver chromeDriver;
+    public static WebDriverWait wait;
 
-    public static void findResume() throws InterruptedException {
+    public static void findResume() throws InterruptedException{
         System.setProperty("webdriver.chrome.driver", "C://chromedriver/chromedriver.exe");
         options = new ChromeOptions();
         options.addArguments("--headless");
+
         chromeDriver = new ChromeDriver(options);
+        wait = new WebDriverWait(chromeDriver, 10);
         hhSearchPage = new HHSearchPage(chromeDriver);
         hhResultResumePage = new HHResultResumePage(chromeDriver);
-        chromeDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        //chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         chromeDriver.get("https://hh.ru/search/resume/advanced");
         hhSearchPage.clickCloseButton();
         hhSearchPage.inputSectionSkils(InterfaceSearchPanel.textSkils);
