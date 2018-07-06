@@ -14,6 +14,7 @@ public class InterfaceResultPanel extends JPanel {
     public static JPanel panelResume = new JPanel();
 
     public InterfaceResultPanel(){
+        panelResume.removeAll();
         panelResume.setLayout(null);
         JButton buttonSave;
         JButton buttonShowAll;

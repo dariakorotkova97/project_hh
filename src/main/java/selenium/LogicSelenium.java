@@ -20,7 +20,7 @@ public class LogicSelenium {
     public static WebDriverWait wait;
 
     public static void findResume() throws InterruptedException{
-        System.setProperty("webdriver.chrome.driver", "C://chromedriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", ".//chromedriver.exe");
         options = new ChromeOptions();
         options.addArguments("--headless");
 

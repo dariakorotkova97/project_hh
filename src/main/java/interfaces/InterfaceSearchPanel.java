@@ -42,25 +42,30 @@ public class InterfaceSearchPanel extends JPanel{
         skilsText.setBounds(250,130,180,30);
         add(skilsText);
 
-        final JRadioButton skilsRB1 = new JRadioButton("нет опыта", false);
+        ButtonGroup group = new ButtonGroup();
+        final JRadioButton skilsRB1 = new JRadioButton("нет опыта", true);
         skilsRB1.setBounds(250,187, 190, 30);
         skilsRB1.setFont(new Font("Serif",Font.PLAIN,16));
         add(skilsRB1);
+        group.add(skilsRB1);
 
         final JRadioButton skilsRB2 = new JRadioButton("от 1 года до 3 лет", false);
         skilsRB2.setBounds(250,217, 190, 30);
         skilsRB2.setFont(new Font("Serif",Font.PLAIN,16));
         add(skilsRB2);
+        group.add(skilsRB2);
 
         final JRadioButton skilsRB3 = new JRadioButton("от 3 лет до 6 лет", false);
         skilsRB3.setBounds(250,247, 190, 30);
         skilsRB3.setFont(new Font("Serif",Font.PLAIN,16));
         add(skilsRB3);
+        group.add(skilsRB3);
 
         final JRadioButton skilsRB4 = new JRadioButton("более 6 лет", false);
         skilsRB4.setBounds(250,277, 190, 30);
         skilsRB4.setFont(new Font("Serif",Font.PLAIN,16));
         add(skilsRB4);
+        group.add(skilsRB4);
 
         JLabel salaryLabel = new JLabel("Зарплата");
         salaryLabel.setBounds(50,320, 90, 30);
@@ -112,7 +117,6 @@ public class InterfaceSearchPanel extends JPanel{
                     minWage = salaryTextFrom.getText();
                     maxWage = salaryTextTo.getText();
                     textSkils = skilsText.getText();
-                    countResume = Integer.parseInt(showText.getText());
 
                     if (skilsRB1.isSelected()) flag =1;
                     if (skilsRB2.isSelected()) flag =2;
@@ -127,7 +131,17 @@ public class InterfaceSearchPanel extends JPanel{
                     if (validatePattern(maxWage, Pattern.compile("[0-9]+"))
                             || validatePattern(minWage, Pattern.compile("[0-9]+"))
                             || validatePattern(showText.getText(), Pattern.compile("[0-9]+"))) {
-                        getErrorMassage("<html>Зарплата и работники - это числовые, неотрицательные значения.</html>");
+                        getErrorMassage("<html>Зарплата и работники - это числовые, целые, неотрицательные значения.</html>");
+                        return;
+                    }
+
+                    if (validatePattern(textSkils, Pattern.compile("^[а-яА-ЯёЁa-zA-Z0-9\\s]+$"))){
+                        getErrorMassage("<html>Недопустимы символы в поле \"Ключевые слова\".</html>");
+                        return;
+                    }
+                    if ((minWage.charAt(0) == '0') || (maxWage.charAt(0) == '0')
+                            || (showText.getText().charAt(0) == '0')){
+                        getErrorMassage("<html>Не может зарплата или количество начинаться на 0!!!!</html>");
                         return;
                     }
 
@@ -135,6 +149,7 @@ public class InterfaceSearchPanel extends JPanel{
                         getErrorMassage("Введите корректный диапазон зарплаты!");
                         return;
                     }
+                    countResume = Integer.parseInt(showText.getText());
                     if (countResume > 15){
                         getErrorMassage("<html>Наша программа выводит<br> не более 15 резюме!</br>");
                         return;
